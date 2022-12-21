@@ -1,0 +1,65 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatefulWidget {
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  int selectedIndex = 0;
+
+  /* list of widget to display on Tap*/
+
+  List<Widget> widgetsList = <Widget>[
+    Text('Home'),
+    Text('Add Product'),
+    Text('Cart'),
+    Text('Contact US'),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Bottom Nav Bar'),
+        ),
+
+        // Bottom Nav bar starts
+        bottomNavigationBar: BottomNavigationBar(
+
+          currentIndex: selectedIndex,
+          onTap: (int index) {
+            setState(
+              () {
+                selectedIndex = index;
+              },
+            );
+          },
+          // Nav bar Items
+          items: [
+            BottomNavigationBarItem(
+                backgroundColor: Colors.deepOrange,
+                icon: Icon(Icons.home_outlined),
+                label: 'Home'),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.control_point_outlined), label: 'Add product'),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.shopping_cart), label: 'cart'),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.phone_callback), label: 'Us'),
+          ], // Nav bar Items Ends
+        ),
+
+        //body takes widgetList which define above and will display widget list against index number
+        body: Center(
+          child: widgetsList[selectedIndex],
+        ),
+      ),
+    );
+  }
+}
